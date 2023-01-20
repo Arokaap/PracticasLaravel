@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FrutaController;
 use App\Http\Controllers\PeliculaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
@@ -16,20 +17,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Route::get('/peliculas/{pagina?}', [PeliculaController::class, 'index']);
 
 Route::get('/detalle/{year?}', [
-    'middleware' => 'testyear',
-    'uses' => 'App\Http\Controllers\PeliculaController@detalle',
-    'as' => 'detalle.pelicula'
+  'middleware' => 'testyear',
+  'uses' => 'App\Http\Controllers\PeliculaController@detalle',
+  'as' => 'detalle.pelicula'
 ]);
 
 Route::get('/redirigir', [PeliculaController::class, 'redirigir']);
 
+Route::get('/formulario', [PeliculaController::class, 'formulario']);
+Route::post('/recibir', [PeliculaController::class, 'recibir']);
+
 Route::resource('usuario', UsuarioController::class);
+
+//Rutas de frutas
+Route::group(['prefix' => 'frutas'], function () {
+  Route::get('/index', [FrutaController::class, 'index']);
+  Route::get('/detail/{id}', [FrutaController::class, 'detail']);
+});
+
+
+
 
 /*
 GET: Conseguir datos
