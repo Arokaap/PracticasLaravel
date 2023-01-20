@@ -37,8 +37,13 @@ Route::resource('usuario', UsuarioController::class);
 
 //Rutas de frutas
 Route::group(['prefix' => 'frutas'], function () {
-  Route::get('/index', [FrutaController::class, 'index']);
-  Route::get('/detail/{id}', [FrutaController::class, 'detail']);
+  Route::get('index', [FrutaController::class, 'index']);
+  Route::get('detail/{id}', [FrutaController::class, 'detail']);
+  Route::get('crear', [FrutaController::class, 'create']);
+  Route::post('save', [FrutaController::class, 'save']);
+  Route::get('delete/{id}', [FrutaController::class, 'delete']);
+  Route::get('edit/{id}', [FrutaController::class, 'edit']);
+  Route::post('update', [FrutaController::class, 'update']);
 });
 
 
